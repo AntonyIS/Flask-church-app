@@ -1,0 +1,21 @@
+venv
+*.pyc
+build
+__pycache__/
+.idea/
+
+# Installer logs
+pip-log.txt
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
