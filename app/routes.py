@@ -1,12 +1,14 @@
 from flask import render_template, redirect, url_for, request
-from app import app
-
+from flask_login import current_user, login_user, logout_user, login_required
+from app import app, db
+from app.forms import SignupForm
+from app.models import User
 
 # The home route, request to '/' ir '/home' on the browser will be served with this route
 @app.route('/')
 @app.route('/home')
 def index():
-	return "Friends church Ruaraka"
+	return render_template('index.html', title='Home page')
 
 
 
@@ -14,9 +16,23 @@ def index():
 # 1.Signup
 # 2.Login
 # 3.Logout
-@app.route('/signup')
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
-	return "Signup here"
+	# check if the current user is trying to register
+	if current.is_authenticated:
+		return redirect(url_for('index'))
+
+	form = SignupForm()
+	if form.validate_on_submit():
+		user = User(username=form.username.data,email=form.email.data)
+		user.set_password()
+		db.session.add(user)
+		db.session.commit()
+		# flash a message for successful registration
+		return redirect(url_for('login'))
+
+
+	return render_template('signup.html', title='Signup page')
 
 
 @app.route('/login')
