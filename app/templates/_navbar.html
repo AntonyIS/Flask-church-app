@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Ruaraka Friends Church</a>
+  <a class="navbar-brand" href="{{url_for('index')}}">Ruaraka Friends Church</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -22,14 +22,33 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-    
+      {% if current_user.is_anonymous %}
       <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link btn btn-info btn_custom" href="{{url_for('signup')}}" style="color:white;padding-left:20px; padding-right: 20px">Join us</a>
       </li>
     
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('login')}}" >Login</a>
+      </li>
+      {% else %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded" style="height: 40px; width:40px">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{url_for('profile')}}">Profile</a>
+          <a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+     <!--  <li class="nav-item">
+        <a class="nav-link" href="{{url_for('profile')}}">Profile</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
+      </li> -->
+      {% endif %}
     </ul>
   </div>
 </nav>

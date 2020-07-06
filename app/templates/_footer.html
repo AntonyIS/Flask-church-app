@@ -57,8 +57,14 @@
 		      </li>
 		    </ul>
 		   <div>
-		   		<a href="" class="btn btn-info btn_custom">Login</a> <small class="text-white">or</small>
-		   		<a href="" class="btn btn-outline-info btn_custom">Create account</a>
+		   	 {% if current_user.is_anonymous %}
+		   	 	<a href="{{url_for('login')}}" class="btn btn-info btn_custom">Login</a> <small class="text-white">or</small>
+		   		<a href="{{url_for('signup')}}" class="btn btn-outline-info btn_custom">Create account</a>
+		   	 {% else %}
+		   	 <a href="{{url_for('profile')}}" class="btn btn-info btn_custom">Account</a>
+		   	 <a href="{{url_for('logout')}}" class="btn btn-info btn_custom">Logout</a>
+			 {% endif %}
+		   		
 		   </div>
 
 		   <div class="mt-5">

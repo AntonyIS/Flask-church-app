@@ -9,7 +9,7 @@ body{
 	border-radius: 30px;
 }
 
-#section_home_top{
+#section_home_top ,#section_auth{
 	font-family: monospace;
 	background-image: url('/static/imgs/bg1.jpg');
 	background-repeat: no-repeat;
@@ -19,6 +19,19 @@ body{
 	color:white;
 
 }
+#section_auth fieldset{
+	border:1px solid #f8f9fa ;
+	padding-top: 20px;
+	padding-right: 25px;
+	padding-left: 25px;
+	padding-bottom: 20px;
+	border-radius: 20px
+}
+#section_auth fieldset input[type='text'], input[type='email'],input[type='password']{
+	background: transparent;
+	color: #f8f9fa ;
+}
+
 
 
 /* <<<<   Start of styles for the footer section >>>>*/

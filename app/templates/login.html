@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content  %}
+<section id="section_auth">
+	<div class="container p-5 mb-5">
+		<div class="pt-5 mb-1">
+			<h1 class="text-center pt-5">Friends Church Ruaraka</h1>
+			<hr>
+			<p class="text-center">
+				Friends Church (Quakers), Nairobi Yearly Meeting was established on 3rd May 1987.  The organization is a constituent member of the Friends Church in Kenya (FCK). Our Head Quarters is located at Friends International Centre, Ngong Road, Nairobi.
+			</p>
+		</div>
+	
+		<div class="pt-5 mb-5">
+			<div class="text-center mb-5">
+				
+				<h3 class="pt-3">Login</h3>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+					<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+						<form action="{{url_for('login')}}" method='post' novalidate>
+							{{form.hidden_tag()}}
+							<fieldset>
+							
+								<div class="form-group">
+									{{form.email(class='form-control', placeholder='Email',type='email')}}
+								</div>
+								<div class="form-group">
+									{{form.password(class='form-control', placeholder='Password', type='password')}}
+								</div>
+							
+								<div class="form-group">
+									{{form.submit(class='btn btn-info btn-block')}}
+								</div>
+								<div>
+									<p class="text-info">
+										{{form.remember_me() }}
+										{{form.remember_me.label }}
+									</p>
+									<p class="m-1">Or</p>
+									<a href="{{url_for('signup')}}"><p class="m-1 text-white">Create account</p></a>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+				</div>
+			</div>
+		</div>
+</div>
+</section>
+
+
+{% endblock content  %}
