@@ -11,7 +11,7 @@ body{
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: bottom;
-	min-height: 90vh;
+	min-height: auto;
 	color:white;
 
 }
