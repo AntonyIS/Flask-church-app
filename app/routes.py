@@ -1,8 +1,8 @@
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request,flash
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
-from app.forms import SignupForm,LoginForm
+from app.forms import SignupForm,LoginForm,EditUserProfile
 from app.models import User
 
 # The home route, request to '/' ir '/home' on the browser will be served with this route
@@ -62,10 +62,57 @@ def logout():
 	return redirect(url_for('index'))
 
 
-@app.route('/profile')
-@login_required
-def profile():
-	user = User.query.filter_by(email=current_user.email).first()
-	title = "{} | Profile ".format(user.username)
-	return render_template('profile.html',title=title )
+@app.route('/profile/<username>', methods=['GET', 'POST'])
 
+def profile(username):
+	user = User.query.filter_by(username=username).first()
+	
+	try:
+		owner = False
+		if current_user.username == username:
+			owner = True
+			form = EditUserProfile(current_user)
+			if form.validate_on_submit():
+				print(form.username.data)
+
+				current_user.username = form.username.data
+				current_user.firstname = form.firstname.data
+				current_user.lastname = form.lastname.data
+				current_user.email = form.email.data
+				current_user.about_me = form.about_me.data
+				current_user.avatar = form.avatar.data
+				current_user.role = form.role.data
+				db.session.commit()
+				flash("Your changes have been submitted")
+				return redirect(url_for('profile', username=current_user.username))
+
+			elif request.method == 'GET':
+				form.username.data = current_user.username 
+				form.firstname.data = current_user.firstname
+				form.lastname.data = current_user.lastname
+				form.email.data = current_user.email
+				form.about_me.data = current_user.about_me
+				form.avatar.data = current_user.avatar 
+				form.role.data = current_user.role
+			title = "{} | Profile ".format(user.username)
+			return render_template('profile.html',title=title,form=form, user=user, owner=owner)
+	except:
+		pass
+	title = "{} | Profile ".format(user.username)
+	return render_template('profile.html',title=title, user=user, owner=owner)
+
+
+@app.route('/members')
+
+def members():
+	users = User.query.all()
+	return render_template('users.html', title="Ruaraka Friends Church | Edit", users=users)
+
+
+
+
+
+
+@app.route('/subscribe', methods=['GET', 'POST'])
+def subscribe():
+	return render_template('index.html',title="Ruaraka Friends Church | Subscribe" )

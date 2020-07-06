@@ -31,3 +31,9 @@ Register form
 Login Form
 ![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/login_church.png)
 
+User Profiile
+v![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/user_profile.png)
+
+Church members
+![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/members.png)
+

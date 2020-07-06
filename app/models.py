@@ -20,6 +20,7 @@ class User(UserMixin,db.Model):
 	password_hash = db.Column(db.String(124), index=True, unique=True)
 	about_me = db.Column(db.String(150))
 	avatar = db.Column(db.String(150))
+	role = db.Column(db.String(124), index=True)
 
 
 	def __repr__(self):

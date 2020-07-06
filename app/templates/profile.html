@@ -2,6 +2,140 @@
 
 {% block content  %}
 <section id="profile_section">
+	<div class="container mt-3 mb-5">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+				<div class="card shadow-lg p-3 mb-1 bg-white rounded text-center">
+					<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mx-auto" style="height: 150px; width:150px">
+					<div class="card-body">
+						<h4 class="">{{user.username}}</h4>
+						<small></small><em>{{user.role}}</em></small>
+			
+					</div>
+				</div>
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<h6>Biography</h6>
+						<hr>
+						<small class="">
+							{{user.about_me}}
+						 </small> 
+							
+
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<p class="text-center"> {{user.username}} has been following these activities </p>
+						<input type="text" name="" disabled="" value="" class="form-control disabled_input">
+						<input type="text" name="" disabled="" value="" class="form-control disabled_input">
+						<input type="text" name="" disabled="" value="" class="form-control disabled_input">
+						<input type="text" name="" disabled="" value="" class="form-control disabled_input">
+						<input type="text" name="" disabled="" value="" class="form-control disabled_input">
+					</div>
+				</div>
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<p class="text-center">{{user.username}} is actively following</p>
+						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
+						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
+						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
+						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
+						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
+						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
+						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
+					</div>
+				</div>
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<p class="text-center">{{user.username}} is actively following</p>
+						 <div class="row">
+						 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
+						 	</div>
+						 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
+						 	</div>
+						 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+						 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
+						 	</div>
+						 	
+						 </div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
+					<div class="card-body">
+						<h6><strong>Recent activities</strong></h6>
+						<small><em>{{user.role}}</em></small>
+					</div>
+				</div>
+				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
+					<div class="card-body">
+						<h6><strong>Recent activities</strong></h6>
+					</div>
+				</div>
+				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
+					<div class="card-body">
+						<h6><strong>Recent activities</strong></h6>
+					</div>
+				</div>
+				{% if owner %}
+					<div class="card shadow-lg p-1 mb-1 bg-white rounded">
+						<form action="{{url_for('profile', username=current_user.username)}}" method="post" novalidate>
+							{{form.hidden_tag()}}
+							<fieldset class="m-2">
+								<h6 class="card-title text-center m-1">Update info here...</h6>
+								<hr>
+								<div class="form-group">
+									{{form.username(class='form-control', placeholder='Username',type='text', style='color:black;padding:5px')}}
+									{% for error in form.username.errors %} <br>
+										<span class="text-danger"><small>{{error}}</small></span>
+									{% endfor %}
+								</div>
+								<div class="form-group">
+									{{form.firstname(class='form-control', placeholder='First name',type='text', style='color:black;padding:5px')}}
+									{% for error in form.firstname.errors %} <br>
+										<span class="text-danger"><small>{{error}}</small></span>
+									{% endfor %}
+								</div>
+								<div class="form-group">
+									{{form.lastname(class='form-control', placeholder='Last name',type='text', style='color:black;padding:5px')}}
+									{% for error in form.firstname.errors %} <br>
+										<span class="text-danger"><small>{{error}}</small></span>
+									{% endfor %}
+								</div>
+								<div class="form-group">
+									{{form.email(class='form-control', placeholder='Bio',type='email', style='color:black;padding:5px')}}
+									{% for error in form.email.errors %} <br>
+										<span class="text-danger"><small>{{error}}</small></span>
+									{% endfor %}
+								</div>
+								<div class="form-group">
+									{{form.role(class='form-control', placeholder='Role',type='text', style='color:black;padding:5px')}}
+									{% for error in form.role.errors %} <br>
+										<span class="text-danger"><small>{{error}}</small></span>
+									{% endfor %}
+								</div>
+								<div >
+									{{form.about_me(class='form-control', placeholder='Bio',type='email', style='color:black;padding:5px')}}
+									{% for error in form.about_me.errors %} <br>
+										<span class="text-danger"><small>{{error}}</small></span>
+									{% endfor %}
+								</div>
+								<div >
+									{{form.submit(class='btn btn-info btn-block m-2')}}
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				{% endif%}
+			</div>
+		</div>
+	</div>
 	
 </section>
 

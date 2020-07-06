@@ -25,7 +25,7 @@ body{
 	padding-right: 25px;
 	padding-left: 25px;
 	padding-bottom: 20px;
-	border-radius: 20px
+	border-radius: 5px
 }
 #section_auth fieldset input[type='text'], input[type='email'],input[type='password']{
 	background: transparent;
@@ -105,3 +105,28 @@ body{
 
 }
 /* <<<<   End of styles for the footer section >>>>*/
+
+/* <<<<  Start of styles for the Profile section >>>>*/
+
+#profile_section{
+  min-height: 70vh;
+}
+
+.disabled_input{
+  margin:5px;
+}
+
+.pluc_icon{
+  background:white;
+  color: black;
+  width: 40px;
+  padding-right: 15px;
+  font-size: 20px;
+  width: 50px;
+   height: 50px;
+  text-align: right;
+  text-decoration: none;
+  border-radius: 50%;
+  border:1px solid black;
+}
+/* <<<<  End of styles for the Profile section >>>>*/

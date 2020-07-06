@@ -20,6 +20,9 @@
        <li class="nav-item">
         <a class="nav-link" href="#">Programs</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{url_for('members')}}">Members</a>
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       {% if current_user.is_anonymous %}
@@ -32,22 +35,17 @@
       </li>
       {% else %}
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded" style="height: 40px; width:40px">
+        <a class="nav-link dropdown-toggle" href="{{url_for('profile',username=current_user.username)}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span><strong>{{current_user.username}}</strong></span><img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded" style="height: 40px; width:40px">
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{url_for('profile')}}">Profile</a>
+          <a class="dropdown-item" href="{{url_for('profile',username=current_user.username)}}">Profile</a>
           <a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+
         </div>
       </li>
-     <!--  <li class="nav-item">
-        <a class="nav-link" href="{{url_for('profile')}}">Profile</a>
-      </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
-      </li> -->
+     
       {% endif %}
     </ul>
   </div>

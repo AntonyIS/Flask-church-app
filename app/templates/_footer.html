@@ -1,16 +1,16 @@
 <section>
-	<div id="footer_top" class="bg-white">
+	<div id="footer_top" class="bg-light pt-5">
 		<div class="text-center">
 			<h2>Ruaraka Friends Church.</h2>
 			<p>Subscribe to our newsletter.</p>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
-					<form action="" method="post">
+					<form action="{{url_for('subscribe')}}" method="post">
 						<fieldset>
 							<div class="form-group" id="subscribe_input">
 								<input type="email" name="email" class="form-control m-3 shadow-sm p-3 mb-5 bg-white rounded" placeholder="Your e-mail address.">
-								<p><small class="text-center text-info">By subscribing you agree to our <a href="">Terms of Use</a> and <a href="">Privacy</a></small></p>
+								<p><small class="text-center text-info">By subscribing you agree to our <a href=""><strong>Terms of Use</strong></a> and <a href=""><strong>Privacy</strong></a></small></p>
 								<button type="submit" class="btn btn-info btn_custom">Subscribe</button>
 							</div>
 						</fieldset>
@@ -61,7 +61,7 @@
 		   	 	<a href="{{url_for('login')}}" class="btn btn-info btn_custom">Login</a> <small class="text-white">or</small>
 		   		<a href="{{url_for('signup')}}" class="btn btn-outline-info btn_custom">Create account</a>
 		   	 {% else %}
-		   	 <a href="{{url_for('profile')}}" class="btn btn-info btn_custom">Account</a>
+		   	 <a href="{{url_for('profile',username=current_user.username)}}" class="btn btn-info btn_custom">Account</a>
 		   	 <a href="{{url_for('logout')}}" class="btn btn-info btn_custom">Logout</a>
 			 {% endif %}
 		   		

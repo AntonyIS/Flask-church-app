@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content  %}
+<section id="section_users">
+	<div class="container p-5 mb-5">
+		<div class="pt-5 mb-5">
+			<h1 class="text-center">Friends Church Ruaraka Members</h1>
+			<hr>
+
+			{% if users %}
+				{% for user in users %}
+					<div class="row">
+						<div class="col" style="background-color: ">
+							<div class="row ">
+								<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+									<a href="{{url_for('profile',username=user.username)}}" style="text-decoration: none">
+										<div class="card shadow-sm p-1 mb-1 bg-white rounded text-dark">
+											<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mx-auto" style="height: 70px; width:70px"> 
+											<small class="text-center">{{user.username}}</small>
+										</div>
+									</a>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-7">
+									<a href="{{url_for('profile',username=user.username)}}" style="text-decoration: none;">
+										<div class="card shadow-sm p-3 mb-1 bg-white rounded text-dark" style="display: block;height: 100px">
+											<div class="card-body p-0" >
+												
+												<div id="{{user.username}}" class="">
+													{{user.about_me}}
+												</div>
+											</div>
+										</div>
+									</a>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 mt-4">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</ul>
+				
+			{% else %}
+			<p>No users available</p>
+			{% endif %}
+
+		</div>
+</div>
+</section>
+{% endblock content  %}
