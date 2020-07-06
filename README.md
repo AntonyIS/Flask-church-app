@@ -24,3 +24,10 @@ Terms of Use
 ![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/footer_img.png)
 
 
+Register form
+![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/signup_church.png)
+
+
+Login Form
+![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/login_church.png)
+
