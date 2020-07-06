@@ -8,7 +8,7 @@ from app.models import User
 @app.route('/')
 @app.route('/home')
 def index():
-	return render_template('index.html', title='Home page')
+	return render_template('index.html', title='Friends Church Ruaraka')
 
 
 
