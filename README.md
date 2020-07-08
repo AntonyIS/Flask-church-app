@@ -37,3 +37,6 @@ v![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/us
 Church members
 ![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/members.png)
 
+
+Church member can post into the website
+![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/church_post.png)
