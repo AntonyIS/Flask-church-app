@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextArea
 from wtforms.validators import ValidationError, DataRequired, Email,Length, EqualTo,Length
 
 
-from app.models import User
+from app.models import User, Post
 
 class SignupForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
@@ -52,4 +52,15 @@ class EditUserProfile(FlaskForm):
 			user = User.query.filter_by(username=self.username.data).first()
 			if user is not None:
 				raise ValidationError('Please use a different username.')
+
+class PostForm(FlaskForm):
+	title = StringField('Title',validators=[DataRequired()])
+	body = TextAreaField('Body', validators=[DataRequired(), Length(min=0, max=500)])
+	submit = SubmitField('Post')
+
+	# check if similar post exist
+	def post_exist(self):
+		pass
+
+
 
