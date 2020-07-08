@@ -126,23 +126,10 @@ def add_post():
 
 
 
-
-
-
-
-
-
-
-
-
-
 @app.route('/members')
 def members():
 	users = User.query.all()
 	return render_template('users.html', title="Ruaraka Friends Church | Edit", users=users)
-
-
-
 
 
 
