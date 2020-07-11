@@ -1,17 +1,13 @@
-
 import unittest
-from app import app, db
-
+from app import app,db
 from app.models import User, Post
 
-class PostModelCase(unittest.TestCase):
-	def setup(self):
-		app.config['SQLALCHEMY_DATBASE_URI'] = 'sqlite://'
-		db.create_all()
 
-	def tearDown(self):
-		db.session.remove()
-		db.drop_all()
+
+class PostModelCase(unittest.TestCase):
+
+	def setUp(self):
+		db.create_all()
 
 	def test_app_post(self):
 		u = User(username='antony',email='antony@gmail.com')
@@ -22,7 +18,11 @@ class PostModelCase(unittest.TestCase):
 		db.session.add(p1)
 		db.session.commit()
 
-		self.assertEqual(Post.query.all().count(),1)
+		self.assertEqual(len(Post.query.all()),1)
+
+	def tearDown(self):
+		db.session.remove()
+		db.drop_all()
 
 if __name__ == '__main__':
 	unittest.main(verbosity=2)
