@@ -130,3 +130,28 @@ body{
   border:1px solid black;
 }
 /* <<<<  End of styles for the Profile section >>>>*/
+
+/* <<<<  Start of styles for the About top section >>>>*/
+#about-bottom{
+  background-image: url('/static/imgs/about_img.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  min-height: auto;
+  height: auto;
+  
+}
+/* <<<<  end of styles for the About top section >>>>*/
+
+
+/* <<<<  start of styles for the users top section >>>>*/
+#section-users-top{
+  background-image: url('/static/imgs/about_img.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  height: 35vh;
+  max-height: 30vh;
+  color: white
+}
+/* <<<<  end of styles for the users top section >>>>*/

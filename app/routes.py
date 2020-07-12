@@ -9,9 +9,6 @@ from app.models import User, Post
 @app.route('/')
 @app.route('/home')
 def index():
-	print(app.config['ENV'])
-	print(app.config['SECRET_KEY'])
-	print(app.config['SQLALCHEMY_DATABASE_URI'])
 	return render_template('index.html', title='Friends Church Ruaraka')
 
 

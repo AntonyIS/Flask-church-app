@@ -8,10 +8,22 @@
 				<div class="card shadow-lg p-3 mb-1 bg-white rounded text-center">
 					<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mx-auto" style="height: 150px; width:150px">
 					<div class="card-body p-0">
-						<em class="">{{user.username}} <small>{{user.firstname}} {{user.lastname}}</small></em>
+						<small>{{user.firstname}} {{user.lastname}}</small>
 						<input type="tex" disabled value="{{user.role}}" class="form-control" style="text-align: center">
 						
 			
+					</div>
+				</div>
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<h6 class="text-center">Social media links</h6>
+						<hr>
+						<div id="social_media_links" class="text-center">
+					        <a href="#" class="fa fa-facebook"></a>
+					        <a href="#" class="fa fa-twitter"></a>
+					        <a href="#" class="fa fa-linkedin"></a>
+				      </div>
+							
 					</div>
 				</div>
 				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
@@ -31,18 +43,18 @@
 						{% else %}
 							
 							{% if posts %}
-								<ul>
+								<ol class="p-0">
 									<p class="text-info">{{user.username }} posts.</p>
 									{% for post in posts %}
 									<a href=""><li>{{post.title}}</li></a>
 									{% endfor %}
-								</ul>
+								</ol>
 							{% else %}
 								<p class="text-success">No post available</p>
 							{% endif %}
 						{% endif %}
 						
-						<hr>
+			
 						
 							
 					</div>
