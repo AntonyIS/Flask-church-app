@@ -19,10 +19,13 @@ Login Form
 ![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/login_church.png)
 
 User Profile
-v![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/user_profile.png)
+![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/user_profile.png)
 
 User Posting content
 ![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/church_post.png)
 
 Members page
 ![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/members.png)
+
+Footer section
+![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/footer_img.png)
