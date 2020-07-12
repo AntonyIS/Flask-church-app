@@ -28,8 +28,5 @@ Members page
 ![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/members.png)
 
 Footer section
-<<<<<<< HEAD
 ![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/footer_img.png)
-=======
-![](https://github.com/AntonyIS/Flask-church-app/blob/master/app/static/imgs/footer_img.png)
->>>>>>> 12389f5ba09db364b598779782537dc72bec7b3b
+
