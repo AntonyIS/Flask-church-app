@@ -2,7 +2,7 @@ from flask import render_template, redirect, url_for, request,flash
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
-from app.forms import SignupForm,LoginForm,EditUserProfile,PostForm,SermonForm
+from app.forms import SignupForm,LoginForm,EditUserProfile,PostForm,SermonForm,SermonEditForm
 from app.models import User, Post,Sermon
 
 # The home route, request to '/' ir '/home' on the browser will be served with this route
@@ -141,6 +141,7 @@ def subscribe():
 
 
 @app.route('/sermon/post', methods=['GET', 'POST'])
+@login_required
 def sermon():
 	if not current_user.is_authenticated:
 		return redirect(url_for('login'))
@@ -158,3 +159,46 @@ def sermon():
 		return redirect(url_for('profile', username=current_user.username))
 
 	return render_template('sermon_post.html', title="Post Sermon", form=form)
+
+
+@app.route('/sermon/details/<sermon_id>')
+def sermon_details(sermon_id):
+	sermon = Sermon.query.get(sermon_id)
+	sermons= Sermon.query.filter_by(author=sermon.author).all()
+	return render_template('sermon_details.html', title=sermon.title, sermon=sermon,sermons=sermons )
+
+
+
+@app.route('/sermon/edit/<sermon_id>', methods=['GET', 'POST'])
+@login_required
+def sermon_edit(sermon_id):
+	sermon = Sermon.query.get(sermon_id)
+
+	if sermon.author.username != current_user.username:
+		return redirect('index')
+
+	form = SermonEditForm()
+	if form.validate_on_submit():
+		sermon.title = form.title.data
+		sermon.text = form.text.data
+		sermon.body = form.body.data
+		db.session.commit()
+		return redirect(url_for('sermon_edit',sermon_id=sermon.id ))
+
+	elif request.method == 'GET':
+		form.title.data = sermon.title
+		form.text.data = sermon.text
+		form.body.data = sermon.body
+
+	title = "Edit ".format(sermon.title)
+	sermons= Sermon.query.filter_by(author=sermon.author).all()
+	return render_template('sermon_edit.html', title=title, sermon=sermon,sermons=sermons, form=form )
+
+#
+@app.route('/sermon/delete/<sermon_id>', methods=['GET','POST'])
+@login_required
+def sermon_delete(sermon_id):
+	sermon = Sermon.query.get(sermon_id)
+	db.session.delete(sermon)
+	db.session.commit()
+	return redirect(url_for('profile', username=sermon.author.username))

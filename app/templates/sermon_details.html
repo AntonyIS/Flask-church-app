@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content  %}
+<section id="profile_section">
+	<div class="container mt-3 mb-5">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+        <a href="{{url_for('profile', username=sermon.author.username)}}">
+  				<div class="card shadow-lg p-3 mb-1 bg-white rounded text-center">
+  					<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mx-auto" style="height: 150px; width:150px">
+  					<div class="card-body p-0">
+  						<small>{{sermon.author.firstname}} {{sermon.author.lastname}}</small>
+  						<input type="tex" disabled value="{{sermon.author.role}}" class="form-control" style="text-align: center">
+
+
+  					</div>
+  				</div>
+        </a>
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<div id="social_media_links" class="text-center">
+					        <a href="#" class="fa fa-facebook"></a>
+					        <a href="#" class="fa fa-twitter"></a>
+					        <a href="#" class="fa fa-linkedin"></a>
+				      </div>
+					</div>
+				</div>
+        {% if current_user.username == sermon.author.username   %}
+          <a href="{{url_for('sermon_edit', sermon_id=sermon.id)}}" class="btn btn-primary btn-block btn_custom">Edit</a>
+          <a href="{{url_for('sermon_delete', sermon_id=sermon.id)}}" class="btn btn-danger btn-block btn_custom">Delete</a>
+        {% endif %}
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<h3 class=""> {{sermon.title}} </h3>
+            <strong>Text: <span class="text text-success">{{sermon.text}}</span> </strong>
+            <hr class="pt-0" style="height:2px">
+					  <p>{{sermon.body}}</p>
+					</div>
+				</div>
+
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+            {% if sermons %}
+            	<h4 class=""><a href="{{url_for('profile', username=sermon.author.username)}}">{{sermon.author.username}}</a> also posted these sermons.</h4>
+              <div class="row">
+                {% for sermon in sermons %}
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    	<a href="{{url_for('sermon_details', sermon_id=sermon.id)}}" style="text-decoration: none">
+                      <div class="card shadow-lg p-3 mb-2 bg-white rounded">
+              					<div class="card-body">
+                          	<h5 class=""> {{sermon.title}} </h3>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+
+            {% else %}
+                <p>No sermons</p>
+            {% endif %}
+
+
+					</div>
+				</div>
+			</div>
+
+	</div>
+
+</section>
+
+{% endblock content  %}

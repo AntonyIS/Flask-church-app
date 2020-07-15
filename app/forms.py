@@ -68,3 +68,9 @@ class SermonForm(FlaskForm):
 	text = StringField('Bible verse',validators=[DataRequired()])
 	body = TextAreaField('Content', validators=[DataRequired(), Length(min=0, max=500)])
 	submit = SubmitField("Post a sermon")
+
+class SermonEditForm(FlaskForm):
+	title = StringField('Title',validators=[DataRequired()])
+	text = StringField('Bible verse',validators=[DataRequired()])
+	body = TextAreaField('Content', validators=[DataRequired(), Length(min=0, max=500)])
+	submit = SubmitField("Edit sermon")

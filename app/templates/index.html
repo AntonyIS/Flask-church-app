@@ -137,7 +137,7 @@
 							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 								<div class="card shadow-sm p-3 mb-5 bg-white rounded mt-0">
 									<div class="card-body pt-0 ">
-										<a href="" style="text-decoration: none">
+										<a href="{{url_for('sermon_details', sermon_id=sermon.id)}}" style="text-decoration: none">
 											<h5>{{sermon.title|truncate(35,True)}}</h5>
 											<hr class="bg-info mt-0" style="height:2px">
 											<em><strong>{{sermon.author.firstname}} {{sermon.author.lastname}}</strong></em> <br>
