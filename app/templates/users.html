@@ -8,37 +8,68 @@
 			<p class="lead">
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex 
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex
 			</p>
 		</div>
 	</div>
-	<div class="container p-3 mb-5">
+	<div class="container-fluid p-3 mb-5">
 		<div class="pt-2 mb-3">
 			{% if users %}
 				<div class="row">
 				{% for user in users %}
-						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
-							<a href="{{url_for('profile',username=user.username)}}">
-								<div class="card-transparent shadow-lg p-3 mb-4 bg-white rounded text-center rounded ">
-									<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" style="height: 100px;width:100px"class="img-rounded mx-auto ">
-									<div class="card-body">
-										<h4>{{user.firstname}} {{user.lastname}}</h4>
-										<h5>{{user.role}}</h5>
-										<hr>
-										<div id="social_media_links" class="text-center ml-3">
-									        <a href="#" class="fa fa-facebook"></a>
-									        <a href="#" class="fa fa-twitter"></a>
-									        <a href="#" class="fa fa-linkedin"></a>
-								      </div>
-									</div>
+						<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+							<a href="{{url_for('profile',username=user.username)}}" style="text-decoration:none">
+								<div class="card-transparent">
+									<div class="card flip_card">
+										<div class="flip-card">
+											  <div class="flip-card-inner">
+											    <div class="flip-card-front">
+											     <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" style="height: 300px;width:300px"class="img-rounded mx-auto ">
+											    </div>
+											    <div class="card-body flip-card-back">
+											      <h1 class="text text-white">{{user.firstname}} {{user.lastname}}</h1>
+														{% if user.role %}
+															<p class="text text-white">{{user.role}}</p>
+														{% else %}
+															<p class="text text-white">Member</p>
+														{% endif %}
+														<hr>
+														<div id="social_media_links" class="text-center ml-3">
+																	<a href="#" class="fa fa-facebook nav-link"></a>
+																	<a href="#" class="fa fa-twitter nav-link"></a>
+																	<a href="#" class="fa fa-linkedin nav-link"></a>
+															</div>
+
+											    </div>
+											  </div>
+											</div>
+										</div>
 								</div>
 							</a>
 						</div>
-					
+
+						<!-- <div class="card-transparent shadow-lg p-3 mb-4 bg-white rounded text-center rounded ">
+							<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" style="height: 100px;width:100px"class="img-rounded mx-auto ">
+							<div class="card-body">
+								<h4>{{user.firstname}} {{user.lastname}}</h4>
+								{% if user.role %}
+									<p>{{user.role}}</p>
+								{% else %}
+									<p>Member</p>
+								{% endif %}
+								<hr>
+								<div id="social_media_links" class="text-center ml-3">
+											<a href="#" class="fa fa-facebook"></a>
+											<a href="#" class="fa fa-twitter"></a>
+											<a href="#" class="fa fa-linkedin"></a>
+									</div>
+							</div>
+						</div> -->
+
 				{% endfor %}
 				</div>
 			</ul>
-				
+
 			{% else %}
 			<p>No users available</p>
 			{% endif %}

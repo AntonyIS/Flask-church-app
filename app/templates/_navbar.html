@@ -9,20 +9,21 @@
         <a class="nav-link" href="#section-about-us">About us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/#section-leaders">Leadership</a>
-      </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="#">Sermons</a>
+        <a class="nav-link" href="#section-sermons">Sermons</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="/#section-leaders">Leadership</a>
+      </li>
+
+      <!-- <li class="nav-item">
         <a class="nav-link" href="#">Events</a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="#">Groups</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="#">Programs</a> -->
-      </li>
+        <a class="nav-link" href="#">Programs</a>
+      </li> -->
       <li class="nav-item">
         <a class="nav-link" href="{{url_for('members')}}">Members</a>
       </li>
@@ -40,12 +41,15 @@
       <li class="nav-item">
         <a class="nav-link btn btn-info btn_custom" href="{{url_for('signup')}}" style="color:white;padding-left:20px; padding-right: 20px">Join us</a>
       </li>
-    
+
       <li class="nav-item">
         <a class="nav-link" href="{{url_for('login')}}" >Login</a>
       </li>
       {% else %}
-      
+      <li class="nav-item">
+        <a class="nav-link btn btn-info btn_custom text-white mt-2 pr-3" href="{{url_for('sermon')}}" >Post a sermon</a>
+      </li>
+
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="{{url_for('profile',username=current_user.username)}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span><strong>{{current_user.username}}</strong></span><img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded" style="height: 40px; width:40px">
@@ -59,7 +63,7 @@
 
         </div>
       </li>
-     
+
       {% endif %}
     </ul>
   </div>

@@ -2,14 +2,15 @@ from flask import render_template, redirect, url_for, request,flash
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
-from app.forms import SignupForm,LoginForm,EditUserProfile,PostForm
-from app.models import User, Post
+from app.forms import SignupForm,LoginForm,EditUserProfile,PostForm,SermonForm
+from app.models import User, Post,Sermon
 
 # The home route, request to '/' ir '/home' on the browser will be served with this route
 @app.route('/')
 @app.route('/home')
 def index():
-	return render_template('index.html', title='Friends Church Ruaraka')
+	sermons = Sermon.query.all()[:4]
+	return render_template('index.html', title='Friends Church Ruaraka', sermons=sermons)
 
 
 
@@ -101,12 +102,12 @@ def profile_edit(username):
 		return redirect(url_for('profile_edit', username=current_user.username))
 
 	elif request.method == 'GET':
-		form.username.data = current_user.username 
+		form.username.data = current_user.username
 		form.firstname.data = current_user.firstname
 		form.lastname.data = current_user.lastname
 		form.email.data = current_user.email
 		form.about_me.data = current_user.about_me
-		form.avatar.data = current_user.avatar 
+		form.avatar.data = current_user.avatar
 		form.role.data = current_user.role
 	title = "{} | Profile ".format(current_user.username)
 	return render_template('profile_edit.html',title=title,form=form)
@@ -137,3 +138,23 @@ def members():
 @app.route('/subscribe', methods=['GET', 'POST'])
 def subscribe():
 	return render_template('index.html',title="Ruaraka Friends Church | Subscribe" )
+
+
+@app.route('/sermon/post', methods=['GET', 'POST'])
+def sermon():
+	if not current_user.is_authenticated:
+		return redirect(url_for('login'))
+
+	form = SermonForm()
+	if form.validate_on_submit():
+		sermon = Sermon(
+			title = form.title.data,
+			text = form.text.data,
+			body = form.body.data,
+			user_id = current_user.id
+		)
+		db.session.add(sermon)
+		db.session.commit()
+		return redirect(url_for('profile', username=current_user.username))
+
+	return render_template('sermon_post.html', title="Post Sermon", form=form)
