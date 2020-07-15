@@ -202,3 +202,9 @@ def sermon_delete(sermon_id):
 	db.session.delete(sermon)
 	db.session.commit()
 	return redirect(url_for('profile', username=sermon.author.username))
+
+
+@app.route('/pastors')
+def pastors():
+	pastors = User.query.all()[:4]
+	return render_template('pastors.html', title='Pastors', pastors=pastors)

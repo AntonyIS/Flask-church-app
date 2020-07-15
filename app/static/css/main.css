@@ -231,4 +231,17 @@ body{
 #section-sermon-top{
 	height: 30vh
 }
-/*start of  sermon card */
+/*end of  sermon card */
+
+/*start of  pastor top section */
+#pastors_section-top{
+	background-image: url('/static/imgs/about_img.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+	min-height: 30vh;
+
+
+}
+/*end of  pastor top section */
