@@ -3,43 +3,42 @@
 {% block content  %}
 <section id="section_users">
 	<div id="section-users-top">
-		<div class="text-center pt-3 container">
-			<h1 class="text-center">Friends Church Ruaraka Members</h1>
+		<div class="pt-5 container">
+			<h1 class="mt-5">Friends Church Ruaraka Members</h1>
 			<p class="lead">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				<!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex -->
 			</p>
 		</div>
 	</div>
-	<div class="container-fluid p-3 mb-5">
-		<div class="pt-2 mb-3">
+	<div class="container p-3 mb-5">
+		<div class="pt-2 mb-1">
 			{% if users %}
 				<div class="row">
 				{% for user in users %}
-						<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 col-xl-2">
+						<div class="col-md-3">
 							<a href="{{url_for('profile',username=user.username)}}" style="text-decoration:none">
-								<div class="card-transparent">
-									<div class="card flip_card">
+								<div class="">
+									<div class="flip_card">
 										<div class="flip-card">
 											  <div class="flip-card-inner">
 											    <div class="flip-card-front">
-											     <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" style="height: 300px;width:300px"class="img-rounded mx-auto ">
+											     <img src="{{url_for('static', filename='imgs/profile_img.jpg')}}" style="height: 15rem;width:16.5rem"class="card-img-top">
 											    </div>
 											    <div class="card-body flip-card-back">
-											      <h1 class="text text-white">{{user.firstname}} {{user.lastname}}</h1>
+											      <h1 class="text">{{user.firstname}} {{user.lastname}}</h1>
 														{% if user.role %}
-															<p class="text text-white">{{user.role}}</p>
+															<p class="text">{{user.role}}</p>
 														{% else %}
-															<p class="text text-white">Member</p>
+															<p class="text">Member</p>
 														{% endif %}
 														<hr>
 														<div id="social_media_links" class="text-center ml-3">
-																	<a href="#" class="fa fa-facebook nav-link"></a>
-																	<a href="#" class="fa fa-twitter nav-link"></a>
-																	<a href="#" class="fa fa-linkedin nav-link"></a>
-															</div>
-
+																<a href="#" class="fa fa-facebook nav-link"></a>
+																<a href="#" class="fa fa-twitter nav-link"></a>
+																<a href="#" class="fa fa-linkedin nav-link"></a>
+														</div>
 											    </div>
 											  </div>
 											</div>

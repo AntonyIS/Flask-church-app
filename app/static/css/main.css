@@ -148,8 +148,7 @@ body{
 
 /* <<<<  start of styles for the users top section >>>>*/
 #section-users-top{
-
-  background-image: url('/static/imgs/about_img.jpg');
+  background-image: url('/static/imgs/bg1.jpg') ;
   background-repeat: no-repeat;
 	background-attachment: fixed;
   background-size: cover;
@@ -161,14 +160,14 @@ body{
 /* <<<<  end of styles for the users top section >>>>*/
 
 /* <<<<  start of styles for the about section >>>>*/
-#sects{
+/* #sects{
 	background-image: url('/static/imgs/about_img.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
 
   color: white
-}
+} */
 /* <<<<  end of styles for the about section >>>>*/
 
 
@@ -177,8 +176,10 @@ body{
 
 .flip-card {
   background-color: transparent;
-  width: 300px;
-  height: 300px;
+  width: 16.5rem;
+  height: 15rem;
+	margin-right:20px;
+	margin-bottom:16px;
   perspective: 1000px;
 }
 
@@ -210,8 +211,8 @@ body{
 }
 
 .flip-card-back {
-  background-color: #2980b9;
-  color: white;
+  background-color: #ffffff;
+  color: #000000;
   transform: rotateY(180deg);
 }
 
@@ -235,7 +236,7 @@ body{
 
 /*start of  pastor top section */
 #pastors_section-top{
-	background-image: url('/static/imgs/about_img.jpg');
+	background-image: url('/static/imgs/bg1.jpg') ;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
@@ -245,3 +246,35 @@ body{
 
 }
 /*end of  pastor top section */
+
+/*start of  dynamic navbar effects  */
+
+#menu-area.custom_nav{
+	background: #292b2c ;
+	z-index:999;
+
+}
+
+#menu-area.custom_nav #login_link {
+	border:1px solid #0275d8 ;
+}
+#menu-area.custom_nav #username-font {
+	color: #ffffff ;
+	margin-right:2px
+}
+.w-100{
+	height: 100vh;
+}
+@media only screen and (max-width:767px){
+	.navbar-nav.ml-auto, .navbar-nav{
+		background: rgba(0,0,0,0.5);
+		padding: 1px 10px;
+	}
+	.navbar-toggler{
+		padding: 1px 10px;
+		font-size: 18px;
+		line-height: 0.3;
+		/* background: #ffff; */
+	}
+}
+/*end of  dynamic navbar effects  */
