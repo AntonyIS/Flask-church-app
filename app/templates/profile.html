@@ -27,9 +27,9 @@
 						<h6 class="text-center">Social media links</h6>
 						<hr>
 						<div id="social_media_links" class="text-center">
-					        <a href="#" class="fa fa-facebook"></a>
-					        <a href="#" class="fa fa-twitter"></a>
-					        <a href="#" class="fa fa-linkedin"></a>
+					        <a href="{{user.facebook_url or 'https://www.facebook.com/'}}" class="fa fa-facebook"></a>
+					        <a href="{{user.twitter_url or 'https://www.twitter.com/'}}" class="fa fa-twitter"></a>
+					        <a href="{{user.linkedin_url or 'https://www.linkedin.com/'}}" class="fa fa-linkedin"></a>
 				      </div>
 
 					</div>
@@ -44,9 +44,9 @@
 
 					</div>
 				</div>
-				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+				<!-- <div class="card shadow-lg p-3 mb-2 bg-white rounded">
 					<div class="card-body">
-						{% if (owner and posts) %}
+						{% if current_user.is_au %}
 							<p class="text">Your posts</p>
 						{% else %}
 
@@ -54,20 +54,15 @@
 								<ol class="p-0">
 									<p class="text-info">{{user.username }} posts.</p>
 									{% for post in posts %}
-									<a href=""><li>{{post.title}}</li></a>
+									<a href="{{url_for}}"><li>{{post.title}}</li></a>
 									{% endfor %}
 								</ol>
 							{% else %}
 								<p class="text-success">No post available</p>
 							{% endif %}
 						{% endif %}
-
-
-
-
 					</div>
-
-				</div>
+				</div> -->
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
@@ -80,18 +75,7 @@
 						<input type="text" name="" disabled="" value="" class="form-control disabled_input">
 					</div>
 				</div>
-				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
-					<div class="card-body">
-						<p class="text-center">{{user.username}} is actively following</p>
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-					</div>
-				</div>
+
 				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
 					<div class="card-body">
 						<p class="text-center">{{user.username}} is actively following</p>
@@ -105,7 +89,7 @@
 				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
 					<div class="card-body">
 						<h6><strong>Recent activities</strong></h6>
-						<small><em>{{user.role}}</em></small>
+						<p class="text-info"><a href="#activities">New Sermon by {{user.username}}</a></p>
 					</div>
 				</div>
 				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
@@ -116,7 +100,67 @@
 			</div>
 		</div>
 	</div>
+	<div class="" id="activities">
 
+		<div class="container p-3 mb-5">
+			<h3>Sermons</h3>
+			<div class="pt-2 mb-1">
+				{% if sermons %}
+
+	      	{% for sermon in sermons %}
+					<div class="row">
+							<div class="col-md-12">
+						      <div class="card shadow-lg p-3 mb-2 bg-white rounded">
+	                    <div class="row">
+	                      <div class="col-md-2">
+	                        <a href="{{url_for('sermon_details', sermon_id=sermon.id)}}">
+	                          <img src="{{url_for('static', filename='imgs/profile_img.jpg')}}" style="height: 9rem;width:10rem"class="img-thumbnail">
+	                        </a>
+	                      </div>
+	                      <div class="col-md-10">
+	                          <a href="{{url_for('sermon_details', sermon_id=sermon.id)}}" style="text-decoration:none;">
+	                            <h5 class="mt-1">{{sermon.title}}</h4>
+	                            <hr class="mt-1 text-warning" style="border:2px solid">
+	                            <strong>Text: <span class="text text-warning">{{sermon.text}}</span> </strong> <em class="text text-success">{{sermon.body|truncate(140,True)}}</em>
+	                          </a>
+	    											<br>
+	                          <span class="text-info pt-2"><a href="{{url_for('profile', username=sermon.author.username)}}">
+															{% if user == current_user %}
+															<p>Sermons that you posted.</p>
+															{% else %}
+															<p>By {{user.firstname}} {{user.lastname}}</p>
+															{% endif %}
+														</a> </span>
+	    											<p class="text-right">{{ sermon.created_at.strftime('%m-%d-%Y') }}</p>
+	                      </div>
+	                    </div>
+	                </div>
+							</div>
+					</div>
+	        {% endfor %}
+	        <div class="text-center mt-2">
+	          {% if prev_url %}
+	            <a href="{{ prev_url }}" class="btn btn-info btn_custom">Newer Sermons</a>
+	          {% endif %}
+
+	          {% if next_url %}
+	            <a href="{{ next_url }}" class="btn btn-outline-info btn_custom">Next page</a>
+	          {% endif %}
+	        </div>
+
+
+				{% else %}
+				<div class="">
+	        <p class="lead">
+	          No Sermons available by {{user.firstname}} {{user.lastname}}
+	          <span><a href="{{url_for('index')}}">Go home</a> </span>
+	        </p>
+	      </div>
+				{% endif %}
+
+			</div>
+
+	</div>
 </section>
 
 {% endblock content  %}

@@ -20,9 +20,12 @@ class User(UserMixin,db.Model):
 	password_hash = db.Column(db.String(124), index=True, unique=True)
 	about_me = db.Column(db.String(150))
 	avatar = db.Column(db.String(150))
+	facebook_url = db.Column(db.String(200))
+	twitter_url = db.Column(db.String(200))
+	linkedin_url = db.Column(db.String(200))
 	role = db.Column(db.String(124), index=True)
 	posts = db.relationship('Post', backref='author', lazy='dynamic')
-	posts = db.relationship('Sermon', backref='author', lazy='dynamic')
+	sermons = db.relationship('Sermon', backref='author', lazy='dynamic')
 
 
 	def __repr__(self):

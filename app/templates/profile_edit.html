@@ -2,6 +2,14 @@
 
 {% block content  %}
 <section id="profile_section">
+	<div id="section-users-top">
+		<div class="pt-5 container">
+			<h1 class="mt-5">{{current_user.firstname}} {{current_user.lastname}} (Edit profile here). </h1>
+			<p class="lead">
+
+			</p>
+		</div>
+	</div>
 	<form action="{{url_for('profile_edit', username=current_user.username)}}" method="post" novalidate>
 		{{form.hidden_tag()}}
 	<div class="container mt-3 mb-5">
@@ -20,8 +28,8 @@
 						<hr>
 						<small class="">
 							{{current_user.about_me}}
-						 </small> 
-							
+						 </small>
+
 
 					</div>
 				</div>
@@ -55,6 +63,24 @@
 							{% endfor %}
 						</div>
 						<div class="form-group">
+							{{form.facebook_url(class='form-control', placeholder='Your Facebook link (e.g https://www.facebook.com/ )',type='text', style='color:black;padding:5px')}}
+							{% for error in form.facebook_url.errors %} <br>
+								<span class="text-danger"><small>{{error}}</small></span>
+							{% endfor %}
+						</div>
+						<div class="form-group">
+							{{form.twitter_url(class='form-control', placeholder='Your Twitter link (e.g https://www.twitter.com/ )',type='text', style='color:black;padding:5px')}}
+							{% for error in form.twitter_url.errors %} <br>
+								<span class="text-danger"><small>{{error}}</small></span>
+							{% endfor %}
+						</div>
+						<div class="form-group">
+							{{form.linkedin_url(class='form-control', placeholder='Your Linkedin link (e.g https://www.linkedin.com/ )',type='text', style='color:black;padding:5px')}}
+							{% for error in form.linkedin_url.errors %} <br>
+								<span class="text-danger"><small>{{error}}</small></span>
+							{% endfor %}
+						</div>
+						<div class="form-group">
 							{{form.role(class='form-control', placeholder='Role',type='text', style='color:black;padding:5px')}}
 							{% for error in form.role.errors %} <br>
 								<span class="text-danger"><small>{{error}}</small></span>
@@ -66,33 +92,12 @@
 								<span class="text-danger"><small>{{error}}</small></span>
 							{% endfor %}
 						</div>
-						
+
 							{{form.submit(class='btn btn-info mt-2 btn-block')}}
-						
+
 					</div>
 				</div>
-				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
-					<div class="card-body">
-						<p class="text-center">{{current_user.username}} is actively following</p>
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-					</div>
-				</div>
-				<!-- <div class="card shadow-lg p-3 mb-2 bg-white rounded">
-					<div class="card-body">
-						<p class="text-center">{{current_user.username}} is actively following</p>
-						 <div class="card-body">
-					 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
-					 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
-					 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
-						</div>
-					</div>
-				</div> -->
+
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
 				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
@@ -106,7 +111,7 @@
 						<h6><strong>Recent activities</strong></h6>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

@@ -17,7 +17,7 @@
           </div>
         </li>
         <li class="nav-item mr-0 ">
-          <a class="nav-link mr-0 text-white" href="#section-sermons">Sermons</a>
+          <a class="nav-link mr-0 text-white" href="#/section-sermons">Sermons</a>
         </li>
 
 
@@ -40,9 +40,11 @@
             <a class="nav-link btn btn-warning btn_custom" href="{{url_for('login')}}" id="login_link" style="color:white;padding-left:20px; padding-right: 20px">Login</a>
         </li>
         {% else %}
+        {% if current_user.role == 'Pastor' %}
         <li class="nav-item">
           <a class="nav-link btn btn-info btn_custom text-white mt-2 pr-3" href="{{url_for('sermon')}}" >Post a sermon</a>
         </li>
+        {% endif %}
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="{{url_for('profile',username=current_user.username)}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

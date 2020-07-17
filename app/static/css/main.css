@@ -273,7 +273,7 @@ body{
 #sermons_section_list{
 	height: auto;
 }
-#sermons_section_list, #section-profile-top,#section-sermon-top{
+#sermons_section_list, #section-profile-top{
   background-image: url('/static/imgs/bg1.jpg') ;
   background-repeat: no-repeat;
 	background-attachment: fixed;

@@ -66,6 +66,7 @@ def logout():
 @app.route('/profile/<username>', methods=['GET', 'POST'])
 def profile(username):
 	user = User.query.filter_by(username=username).first()
+	sermons = Sermon.query.filter_by(user_id=user.id).all()
 	posts = None
 	owner = False
 
@@ -77,7 +78,7 @@ def profile(username):
 		pass
 
 	title = "{}'s  Profile ".format(user.username)
-	return render_template('profile.html',title=title, user=user,  posts=posts)
+	return render_template('profile.html',title=title, user=user, posts=posts,sermons=sermons)
 
 
 @app.route('/profile/edit/<username>', methods=['GET','POST'])
@@ -89,7 +90,7 @@ def profile_edit(username):
 
 	form = EditUserProfile(current_user.username)
 	if form.validate_on_submit():
-		print('Hello world')
+	
 		current_user.username = form.username.data
 		current_user.firstname = form.firstname.data
 		current_user.lastname = form.lastname.data

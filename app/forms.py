@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField
-from wtforms.validators import ValidationError, DataRequired, Email,Length, EqualTo,Length
+from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField, SelectField
+from wtforms.validators import ValidationError, DataRequired, Email,Length, EqualTo,Length,Regexp
 
 
 from app.models import User, Post
@@ -39,7 +39,14 @@ class EditUserProfile(FlaskForm):
 	lastname = StringField('Lastname')
 	about_me = TextAreaField('Bio', validators=[Length(min=0,max=150)])
 	avatar = StringField('Profile Picture')
-	role = StringField('Role')
+	role = SelectField(
+		'Role',
+		choices = [ ('Member','Member'),('Pastor', 'Pastor'),('Praiser','Praiser')]
+	)
+	# , validators=[Regexp('^(http|https):\/\/[\w.\-]+(\.[\w.\-]+)+.*$', 0, 'URL must be a valid link')]
+	facebook_url = StringField('Facebook link')
+	twitter_url = StringField('Twitter link')
+	linkedin_url = StringField('Linkedin link')
 	submit = SubmitField("Update")
 
 
