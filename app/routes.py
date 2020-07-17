@@ -9,7 +9,7 @@ from app.models import User, Post,Sermon
 @app.route('/')
 @app.route('/home')
 def index():
-	sermons = Sermon.query.all()[:4]
+	sermons = Sermon.query.order_by(Sermon.created_at.desc())[:4]
 	return render_template('index.html', title='Friends Church Ruaraka', sermons=sermons)
 
 
@@ -76,7 +76,7 @@ def profile(username):
 	except:
 		pass
 
-	title = "{} | Profile ".format(user.username)
+	title = "{}'s  Profile ".format(user.username)
 	return render_template('profile.html',title=title, user=user,  posts=posts)
 
 
@@ -138,6 +138,15 @@ def members():
 @app.route('/subscribe', methods=['GET', 'POST'])
 def subscribe():
 	return render_template('index.html',title="Ruaraka Friends Church | Subscribe" )
+
+
+@app.route('/sermons')
+def sermons():
+	page = request.args.get('page',1, type=int)
+	sermons = Sermon.query.order_by(Sermon.created_at.desc()).paginate(page,app.config['POSTS_PER_PAGE'],False)
+	next_url = url_for('sermons', page=sermons.next_num) if sermons.has_next else None
+	prev_url = url_for('sermons', page=sermons.prev_num) if sermons.has_prev else None
+	return render_template('sermons.html', title='Sermons | Friends Church Ruaraka', sermons=sermons.items, next_url=next_url,prev_url=prev_url )
 
 
 @app.route('/sermon/post', methods=['GET', 'POST'])

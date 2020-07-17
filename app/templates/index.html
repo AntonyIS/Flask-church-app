@@ -27,7 +27,7 @@
 
 
 <!-- section about us -->
-<section id="section-about-us" class="mb-5">
+<section id="section-about-us" class="mb-0">
 	<div id="about-top" class="p-5">
 		<div class="container">
 			<div class="row">
@@ -52,7 +52,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="about-bottom">
+	<div id="about-bottom" class="mb-0">
 		<div class="container pt-5">
 			<h3 class="text-center text-white">Ruaraka Friends Church</h3>
 
@@ -103,7 +103,7 @@
 				</div>
 			</div>
 		</div>
-		<div class=" text-center p-3 text-white m-2">
+		<div class=" text-center p-3 text-white m-0">
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -117,16 +117,16 @@
 
 
 <!-- section Sermons -->
-<section id="section-sermons">
+<section id="section-sermons" class="mt-0">
 	<div id="section-sermon-top" class="text-center">
-		<div class="container">
+		<div class="container pt-5">
 			<h1>Latest Sermons</h1>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 				quis nostrud exercitation ullamco laboris nisi ut aliquip ex .
 			</p>
-			<a href="#" class="btn btn-danger btn-lg btn_custom">All Sermons</a>
+			<a href="{{url_for('sermons')}}" class="btn btn-danger btn-lg btn_custom">All Sermons</a>
 		</div>
 	</div>
 	<div id="section-sermon-bottom" class="pt-5">
@@ -142,6 +142,8 @@
 											<hr class="bg-info mt-0" style="height:2px">
 											<em><strong>{{sermon.author.firstname}} {{sermon.author.lastname}}</strong></em> <br>
 											<strong>Text: <span class="text text-warning">{{sermon.text}}</span> </strong> <em class="text text-success">{{sermon.body|truncate(140,True)}}</em>
+											<br>
+											{{ sermon.created_at.strftime('%m-%d-%Y') }}
 										</a>
 									</div>
 								</div>

@@ -124,7 +124,7 @@ body{
   padding-right: 15px;
   font-size: 20px;
   width: 50px;
-   height: 50px;
+  height: 50px;
   text-align: right;
   text-decoration: none;
   border-radius: 50%;
@@ -147,7 +147,7 @@ body{
 
 
 /* <<<<  start of styles for the users top section >>>>*/
-#section-users-top{
+#section-users-top,#sermons_section{
   background-image: url('/static/imgs/bg1.jpg') ;
   background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -158,17 +158,6 @@ body{
   color: white
 }
 /* <<<<  end of styles for the users top section >>>>*/
-
-/* <<<<  start of styles for the about section >>>>*/
-/* #sects{
-	background-image: url('/static/imgs/about_img.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: bottom;
-
-  color: white
-} */
-/* <<<<  end of styles for the about section >>>>*/
 
 
 
@@ -226,7 +215,7 @@ body{
 	background-size: cover;
 	background-position: bottom;
 	height: auto;
-	min-height: 40vh;
+	/* min-height: 40vh; */
 	color: white
 }
 #section-sermon-top{
@@ -278,3 +267,21 @@ body{
 	}
 }
 /*end of  dynamic navbar effects  */
+
+
+/* start of sermon section stling */
+#sermons_section_list{
+	height: auto;
+}
+#sermons_section_list, #section-profile-top,#section-sermon-top{
+  background-image: url('/static/imgs/bg1.jpg') ;
+  background-repeat: no-repeat;
+	background-attachment: fixed;
+  background-size: cover;
+  background-position: bottom;
+  height: 35vh;
+  max-height: 30vh;
+  color: white
+}
+
+/* end of sermon section stling */

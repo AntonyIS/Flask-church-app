@@ -2,6 +2,14 @@
 
 {% block content  %}
 <section id="profile_section">
+	<div id="section-sermon-top">
+		<div class="pt-5 container">
+			<h1 class="mt-5">{{sermon.title}}</h1>
+			<p class="lead">
+
+			</p>
+		</div>
+	</div>
 	<div class="container mt-3 mb-5">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
@@ -36,6 +44,7 @@
 					<div class="card-body">
 						<h3 class=""> {{sermon.title}} </h3>
             <strong>Text: <span class="text text-success">{{sermon.text}}</span> </strong>
+						<p class="text-right text-warning">	{{ sermon.created_at.strftime('%m-%d-%Y') }}</p>
             <hr class="pt-0" style="height:2px">
 					  <p>{{sermon.body}}</p>
 					</div>

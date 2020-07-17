@@ -12,8 +12,9 @@ class Config(object):
 	SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI') or "sqlite:///" + os.path.join(basedir, 'church.db')
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	TESTING = False
-	
-	
+	POSTS_PER_PAGE = 4
+
+
 class DevConfig(Config):
 	FLASK_ENV = 'development'
 	DEBUG = True
@@ -24,7 +25,7 @@ class ProdConfig(Config):
 	FLASK_ENV = 'production'
 	DEBUG = False
 	TESTING = False
-	
+
 
 
 class TestingConfig(Config):
@@ -32,5 +33,3 @@ class TestingConfig(Config):
 	FLASK_ENV = 'testing'
 	DEBUG = True
 	TESTING = True
-	
-

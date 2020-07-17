@@ -2,6 +2,14 @@
 
 {% block content  %}
 <section id="profile_section">
+	<div id="section-profile-top">
+		<div class="pt-5 container">
+			<h1 class="mt-5">{{user.firstname}} {{user.lastname}}</h1>
+			<p class="lead">
+					{{user.about_me}}
+			</p>
+		</div>
+	</div>
 	<div class="container mt-3 mb-5">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
@@ -10,8 +18,8 @@
 					<div class="card-body p-0">
 						<small>{{user.firstname}} {{user.lastname}}</small>
 						<input type="tex" disabled value="{{user.role}}" class="form-control" style="text-align: center">
-						
-			
+
+
 					</div>
 				</div>
 				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
@@ -23,7 +31,7 @@
 					        <a href="#" class="fa fa-twitter"></a>
 					        <a href="#" class="fa fa-linkedin"></a>
 				      </div>
-							
+
 					</div>
 				</div>
 				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
@@ -32,8 +40,8 @@
 						<hr>
 						<small class="">
 							{{user.about_me}}
-						 </small> 
-							
+						 </small>
+
 					</div>
 				</div>
 				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
@@ -41,7 +49,7 @@
 						{% if (owner and posts) %}
 							<p class="text">Your posts</p>
 						{% else %}
-							
+
 							{% if posts %}
 								<ol class="p-0">
 									<p class="text-info">{{user.username }} posts.</p>
@@ -53,12 +61,12 @@
 								<p class="text-success">No post available</p>
 							{% endif %}
 						{% endif %}
-						
-			
-						
-							
+
+
+
+
 					</div>
-					
+
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
@@ -108,7 +116,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 </section>
 
 {% endblock content  %}
