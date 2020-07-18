@@ -87,9 +87,23 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
 				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
-					<div class="card-body">
+					<div class="card-body p-1">
 						<h6><strong>Recent activities</strong></h6>
-						<p class="text-info"><a href="#activities">New Sermon by {{user.username}}</a></p>
+						{% if current_user == user %}
+							{% if sermons %}
+								<p class="text-info"><a href="#activities">Your recent sermons</a></p>
+							{% else %}
+								<p>No sermons available</p>
+							{%endif %}
+
+						{% else %}
+							{% if sermons %}
+								<p class="text-info"><a href="#activities">Sermons by {{user.firstname}} {{user.lastname}}</a></p>
+							{% else %}
+								<p>No sermons available by {{user.firstname}} {{user.lastname}} </p>
+							{%endif %}
+
+						{% endif %}
 					</div>
 				</div>
 				<div class="card shadow-lg p-1 mb-1 bg-white rounded">

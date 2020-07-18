@@ -2,6 +2,14 @@
 
 {% block content  %}
 <section id="profile_section">
+	<div id="section-profile-top">
+		<div class="pt-5 container">
+			<h1 class="mt-5">Editing - {{sermon.title | truncate(30, True)}}</h1>
+			<p class="lead">
+
+			</p>
+		</div>
+	</div>
 	<div class="container mt-3 mb-5">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
@@ -55,7 +63,7 @@
 								</div>
 
 								<div class="form-group">
-									{{form.submit(class='btn btn-info btn-block btn_custom')}}
+									{{form.submit(class='btn btn-info btn-md btn_custom')}}
 								</div>
 
 
@@ -63,29 +71,6 @@
             </form>
 					</div>
 				</div>
-
-				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
-					<div class="card-body">
-            {% if sermons %}
-            	<h4 class=""><a href="{{url_for('profile', username=sermon.author.username)}}">{{sermon.author.username}}</a> also posted these sermons.</h4>
-              <div class="row">
-                {% for sermon in sermons %}
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    	<a href="{{url_for('sermon_details', sermon_id=sermon.id)}}" style="text-decoration: none">
-                      <div class="card shadow-lg p-3 mb-2 bg-white rounded">
-              					<div class="card-body">
-                          	<h5 class=""> {{sermon.title}} </h3>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                {% endfor %}
-              </div>
-
-            {% else %}
-                <p>No sermons</p>
-            {% endif %}
-
 
 					</div>
 				</div>
