@@ -76,14 +76,31 @@
 					</div>
 				</div>
 
-				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+				{% if posts %}
+					<div class="card shadow-lg p-3 mb-2 bg-white rounded p-1">
+						<div class="card-body">
+							<p class="">{{user.username}} also posted these.</p>
+							 <hr class="mt-1 text-warning" style="border:2px solid">
+					 			<div class="row">
+									<ol>
+										{% for post in posts %}
+											<a href="{{url_for('post_details', post_id=post.id)}}">
+												<li>{{post.title}}</li>
+											</a>
+										{% endfor %}
+									</ol>
+
+					 			</div>
+						</div>
+					</div>
+				{% else %}
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded p-1">
 					<div class="card-body">
-						<p class="text-center">{{user.username}} is actively following</p>
-				 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
-				 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
-				 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
+							<p class="">{{user.username}} has no posts</p>
+						 	<hr class="mt-1 text-warning" style="border:2px solid">
 					</div>
 				</div>
+				{% endif %}
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
 				<div class="card shadow-lg p-1 mb-1 bg-white rounded">

@@ -52,7 +52,7 @@
 
 				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
 					<div class="card-body">
-            {% if sermons %}
+            {% if sermons and is_many %}
             	<h4 class=""><a href="{{url_for('profile', username=sermon.author.username)}}">{{sermon.author.username}}</a> also posted these sermons.</h4>
               <div class="row">
                 {% for sermon in sermons %}
@@ -67,9 +67,23 @@
                   </div>
                 {% endfor %}
               </div>
-
-            {% else %}
-                <p>No sermons</p>
+            {% elif sermons %}
+							<h4 class=""><a href="{{url_for('profile', username=sermon.author.username)}}">{{sermon.author.username}}</a> also posted this sermon.</h4>
+							<div class="row">
+								{% for sermon in sermons %}
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+											<a href="{{url_for('sermon_details', sermon_id=sermon.id)}}" style="text-decoration: none">
+											<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+												<div class="card-body">
+														<h5 class=""> {{sermon.title}} </h3>
+												</div>
+											</div>
+										</a>
+									</div>
+								{% endfor %}
+							</div>
+						{% else %}
+							<p>{{user.firstname}} {{user.lastname}} has no sermons posted yet</p>
             {% endif %}
 
 

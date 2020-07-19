@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content  %}
+<section id="profile_section">
+	<div id="section-profile-top">
+		<div class="pt-5 container">
+			<h1 class="mt-5">{{post.title}} </h1>
+			<p class="lead">
+
+			</p>
+		</div>
+	</div>
+	<div class="container mt-3 mb-5">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+        <a href="{{url_for('profile', username=post.author.username)}}">
+  				<div class="card shadow-lg p-3 mb-1 bg-white rounded text-center">
+  					<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mx-auto" style="height: 150px; width:150px">
+  					<div class="card-body p-0">
+  						<small>{{post.author.firstname}} {{post.author.lastname}}</small>
+
+  					</div>
+  				</div>
+        </a>
+
+        {% if current_user.username == post.author.username   %}
+          <a href="{{url_for('post_edit', post_id=post.id)}}" class="btn btn-primary btn-block btn_custom">Edit</a>
+          <a href="{{url_for('post_delete', post_id=post.id)}}" class="btn btn-danger btn-block btn_custom">Delete</a>
+        {% endif %}
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<h3 class=""> {{post.title}} </h3>
+            <strong>Text: <span class="text text-success">{{post.body}}</span> </strong>
+						<p class="text-right text-warning">	{{ post.timestamp.strftime('%m-%d-%Y') }}</p>
+            <hr class="pt-0" style="height:2px">
+					  <p>{{post.body}}</p>
+					</div>
+				</div>
+
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+            {% if post and is_many %}
+            	<h4 class=""><a href="{{url_for('profile', username=post.author.username)}}">{{post.author.username}}</a> also posted these.</h4>
+              <div class="row">
+                {% for post in posts %}
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    	<a href="{{url_for('post_details', post_id=post.id)}}" style="text-decoration: none">
+                      <div class="card shadow-lg p-3 mb-2 bg-white rounded">
+              					<div class="card-body">
+                          	<h5 class=""> {{post.title}} </h3>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            {% elif post %}
+							<h4 class=""><a href="{{url_for('profile', username=sermon.author.username)}}">{{post.author.username}}</a> also posted these.</h4>
+							<div class="row">
+								{% for post in posts %}
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+											<a href="{{url_for('post_details', post_id=post.id)}}" style="text-decoration: none">
+											<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+												<div class="card-body">
+														<h5 class=""> {{post.title}} </h3>
+												</div>
+											</div>
+										</a>
+									</div>
+								{% endfor %}
+							</div>
+						{% else %}
+							<p>{{post.author.firstname}} {{post.author.lastname}} has no sermons posted yet</p>
+            {% endif %}
+
+
+					</div>
+				</div>
+			</div>
+
+	</div>
+
+</section>
+
+{% endblock content  %}

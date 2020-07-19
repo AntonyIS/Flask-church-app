@@ -69,6 +69,10 @@ class PostForm(FlaskForm):
 	def post_exist(self):
 		pass
 
+class PostEditForm(FlaskForm):
+	title = StringField('Title',validators=[DataRequired()])
+	body = TextAreaField('Post content (Max of 500 words)',validators=[DataRequired()])
+	submit = SubmitField("Edit sermon")
 
 class SermonForm(FlaskForm):
 	title = StringField('Title',validators=[DataRequired()])

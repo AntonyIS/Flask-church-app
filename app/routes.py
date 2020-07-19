@@ -2,7 +2,14 @@ from flask import render_template, redirect, url_for, request,flash
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from app import app, db
-from app.forms import SignupForm,LoginForm,EditUserProfile,PostForm,SermonForm,SermonEditForm
+from app.forms import (
+	SignupForm,
+	LoginForm,
+	EditUserProfile,
+	PostForm,SermonForm,
+	SermonEditForm,
+	PostEditForm
+)
 from app.models import User, Post,Sermon
 
 # The home route, request to '/' ir '/home' on the browser will be served with this route
@@ -90,7 +97,7 @@ def profile_edit(username):
 
 	form = EditUserProfile(current_user.username)
 	if form.validate_on_submit():
-	
+
 		current_user.username = form.username.data
 		current_user.firstname = form.firstname.data
 		current_user.lastname = form.lastname.data
@@ -126,6 +133,48 @@ def add_post():
 		flash('{} added successfully.'.format(form.title.data))
 		return redirect(url_for('index'))
 	return render_template('post_add.html', title='Add Post', form=form)
+
+
+@app.route('/post/details/<post_id>')
+def post_details(post_id):
+	is_many = False
+	post = Post.query.get(post_id)
+	posts = Post.query.filter_by(author=post.author).order_by(Post.timestamp.desc())
+	if posts.count() > 1:
+		is_many = True
+		posts = Post.query.filter_by(author=post.author).order_by(Post.timestamp.desc())[1:]
+		return render_template('post_details.html', title=post.title, post=post,posts=posts, is_many=is_many )
+	return render_template('post_details.html', title=post.title, post=post,posts=posts, is_many=is_many )
+
+@app.route('/post/edit/<post_id>', methods=['GET', 'POST'])
+@login_required
+def post_edit(post_id):
+	post = Post.query.get(post_id)
+
+	if post.author.username != current_user.username:
+		return redirect('index')
+
+	form = PostEditForm()
+	if form.validate_on_submit():
+		post.title = form.title.data
+		post.body = form.body.data
+		db.session.commit()
+		return redirect(url_for('post_edit',post_id=post.id ))
+
+	elif request.method == 'GET':
+		form.title.data = post.title
+		form.body.data = post.body
+
+	title = "Edit ".format(post.title)
+	posts = Post.query.filter_by(author=post.author).all()
+	return render_template('post_edit.html', title=title, post =post ,posts=posts,form=form )
+
+@app.route('/post/delete/<post_id>')
+def post_delete(post_id):
+	# post = Post.query.get(post_id)
+	# title = "{}'s details".format(post.title)
+	# return render_template('post_details.html', title=title, post=post)
+	return "Delete"
 
 
 
@@ -173,9 +222,14 @@ def sermon():
 
 @app.route('/sermon/details/<sermon_id>')
 def sermon_details(sermon_id):
+	is_many = False
 	sermon = Sermon.query.get(sermon_id)
-	sermons= Sermon.query.filter_by(author=sermon.author).all()
-	return render_template('sermon_details.html', title=sermon.title, sermon=sermon,sermons=sermons )
+	sermons = Sermon.query.filter_by(author=sermon.author).order_by(Sermon.created_at.desc())
+	if sermons.count() > 1:
+		is_many = True
+		sermons = Sermon.query.filter_by(author=sermon.author).order_by(Sermon.created_at.desc())[1:]
+		return render_template('sermon_details.html', title=sermon.title, sermon=sermon,sermons=sermons, is_many=is_many )
+	return render_template('sermon_details.html', title=sermon.title, sermon=sermon,sermons=sermons, is_many=is_many )
 
 
 
