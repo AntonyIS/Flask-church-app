@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField
-from wtforms.validators import ValidationError, DataRequired, Email,Length, EqualTo,Length
+from wtforms import StringField, PasswordField,SubmitField,BooleanField,TextAreaField, SelectField
+from wtforms.validators import ValidationError, DataRequired, Email,Length, EqualTo,Length,Regexp
 
 
-from app.models import User
+from app.models import User, Post
 
 class SignupForm(FlaskForm):
 	username = StringField('Username', validators=[DataRequired()])
@@ -39,7 +39,14 @@ class EditUserProfile(FlaskForm):
 	lastname = StringField('Lastname')
 	about_me = TextAreaField('Bio', validators=[Length(min=0,max=150)])
 	avatar = StringField('Profile Picture')
-	role = StringField('Role')
+	role = SelectField(
+		'Role',
+		choices = [ ('Member','Member'),('Pastor', 'Pastor'),('Praiser','Praiser')]
+	)
+	# , validators=[Regexp('^(http|https):\/\/[\w.\-]+(\.[\w.\-]+)+.*$', 0, 'URL must be a valid link')]
+	facebook_url = StringField('Facebook link')
+	twitter_url = StringField('Twitter link')
+	linkedin_url = StringField('Linkedin link')
 	submit = SubmitField("Update")
 
 
@@ -53,3 +60,28 @@ class EditUserProfile(FlaskForm):
 			if user is not None:
 				raise ValidationError('Please use a different username.')
 
+class PostForm(FlaskForm):
+	title = StringField('Title',validators=[DataRequired()])
+	body = TextAreaField('Body', validators=[DataRequired(), Length(min=0, max=500)])
+	submit = SubmitField('Post')
+
+	# check if similar post exist
+	def post_exist(self):
+		pass
+
+class PostEditForm(FlaskForm):
+	title = StringField('Title',validators=[DataRequired()])
+	body = TextAreaField('Post content (Max of 500 words)',validators=[DataRequired()])
+	submit = SubmitField("Edit sermon")
+
+class SermonForm(FlaskForm):
+	title = StringField('Title',validators=[DataRequired()])
+	text = StringField('Bible verse',validators=[DataRequired()])
+	body = TextAreaField('Content', validators=[DataRequired(), Length(min=0, max=500)])
+	submit = SubmitField("Post a sermon")
+
+class SermonEditForm(FlaskForm):
+	title = StringField('Title',validators=[DataRequired()])
+	text = StringField('Bible verse',validators=[DataRequired()])
+	body = TextAreaField('Content', validators=[DataRequired(), Length(min=0, max=500)])
+	submit = SubmitField("Edit sermon")

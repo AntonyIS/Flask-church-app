@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content  %}
+<section id="profile_section">
+	<form action="{{url_for('add_post')}}" method="post" novalidate>
+		{{form.hidden_tag()}}
+	<div class="container mt-3 mb-5">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+				<div class="card shadow-lg p-3 mb-1 bg-white rounded text-center">
+					<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mx-auto" style="height: 150px; width:150px;min-width: 50;min-height: 50">
+					<div class="card-body p-0">
+						<input type="" name="" class="form-control text-center" value="Choose image" disabled>
+					</div>
+				</div>
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<p class=""> {{current_user.username}} add you post here. </p>
+						<div class="form-group">
+							{{form.title(class='form-control', placeholder='Title of the post',type='text', style='color:black;padding:5px')}}
+							{% for error in form.title.errors %}
+								<span class="text-danger m-0 p-0"><small>{{error}}</small></span>
+							{% endfor %}
+						</div>
+						<div class="form-group">
+							{{form.body(class='form-control', placeholder='Content ( max 500 words )',type='text',rows=4 ,style='color:black;padding:5px')}}
+							{% for error in form.body.errors %}
+								<span class="text-danger m-0 p-0"><small>{{error}}</small></span>
+							{% endfor %}
+						</div>
+						{{form.submit(class='btn btn-info mt-2 btn-block')}}
+					</div>
+				</div>
+				
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
+					<div class="card-body">
+						<h6><strong>Your posts</strong></h6>
+						<hr class="p-0 m-0">
+					</div>
+				</div>
+				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
+					<div class="card-body">
+						<h6><strong>Recent activities</strong></h6>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	</form>
+</section>
+
+{% endblock content  %}

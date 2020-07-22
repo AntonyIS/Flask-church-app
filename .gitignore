@@ -19,3 +19,6 @@ var
 sdist
 develop-eggs
 .installed.cfg
+
+# test db
+tests.db

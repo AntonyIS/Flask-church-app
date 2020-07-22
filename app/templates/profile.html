@@ -2,15 +2,36 @@
 
 {% block content  %}
 <section id="profile_section">
+	<div id="section-profile-top">
+		<div class="pt-5 container">
+			<h1 class="mt-5">{{user.firstname}} {{user.lastname}}</h1>
+			<p class="lead">
+					{{user.about_me}}
+			</p>
+		</div>
+	</div>
 	<div class="container mt-3 mb-5">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
 				<div class="card shadow-lg p-3 mb-1 bg-white rounded text-center">
 					<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mx-auto" style="height: 150px; width:150px">
+					<div class="card-body p-0">
+						<small>{{user.firstname}} {{user.lastname}}</small>
+						<input type="tex" disabled value="{{user.role}}" class="form-control" style="text-align: center">
+
+
+					</div>
+				</div>
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
 					<div class="card-body">
-						<h4 class="">{{user.username}}</h4>
-						<small></small><em>{{user.role}}</em></small>
-			
+						<h6 class="text-center">Social media links</h6>
+						<hr>
+						<div id="social_media_links" class="text-center">
+					        <a href="{{user.facebook_url or 'https://www.facebook.com/'}}" class="fa fa-facebook"></a>
+					        <a href="{{user.twitter_url or 'https://www.twitter.com/'}}" class="fa fa-twitter"></a>
+					        <a href="{{user.linkedin_url or 'https://www.linkedin.com/'}}" class="fa fa-linkedin"></a>
+				      </div>
+
 					</div>
 				</div>
 				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
@@ -19,11 +40,29 @@
 						<hr>
 						<small class="">
 							{{user.about_me}}
-						 </small> 
-							
+						 </small>
 
 					</div>
 				</div>
+				<!-- <div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						{% if current_user.is_au %}
+							<p class="text">Your posts</p>
+						{% else %}
+
+							{% if posts %}
+								<ol class="p-0">
+									<p class="text-info">{{user.username }} posts.</p>
+									{% for post in posts %}
+									<a href="{{url_for}}"><li>{{post.title}}</li></a>
+									{% endfor %}
+								</ol>
+							{% else %}
+								<p class="text-success">No post available</p>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div> -->
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
@@ -36,41 +75,52 @@
 						<input type="text" name="" disabled="" value="" class="form-control disabled_input">
 					</div>
 				</div>
-				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+
+				{% if posts %}
+					<div class="card shadow-lg p-3 mb-2 bg-white rounded p-1">
+						<div class="card-body">
+							<p class="">{{user.username}} also posted these.</p>
+							 <hr class="mt-1 text-warning" style="border:2px solid">
+					 			<div class="row">
+									<ol>
+										{% for post in posts %}
+											<a href="{{url_for('post_details', post_id=post.id)}}">
+												<li>{{post.title}}</li>
+											</a>
+										{% endfor %}
+									</ol>
+
+					 			</div>
+						</div>
+					</div>
+				{% else %}
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded p-1">
 					<div class="card-body">
-						<p class="text-center">{{user.username}} is actively following</p>
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
-						 <img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 40px; width:40px">
+							<p class="">{{user.username}} has no posts</p>
+						 	<hr class="mt-1 text-warning" style="border:2px solid">
 					</div>
 				</div>
-				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
-					<div class="card-body">
-						<p class="text-center">{{user.username}} is actively following</p>
-						 <div class="row">
-						 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-						 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
-						 	</div>
-						 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-						 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
-						 	</div>
-						 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
-						 		<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mr-3" style="height: 100px; width:100px">
-						 	</div>
-						 	
-						 </div>
-					</div>
-				</div>
+				{% endif %}
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
 				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
-					<div class="card-body">
+					<div class="card-body p-1">
 						<h6><strong>Recent activities</strong></h6>
-						<small><em>{{user.role}}</em></small>
+						{% if current_user == user %}
+							{% if sermons %}
+								<p class="text-info"><a href="#activities">Your recent sermons</a></p>
+							{% else %}
+								<p>No sermons available</p>
+							{%endif %}
+
+						{% else %}
+							{% if sermons %}
+								<p class="text-info"><a href="#activities">Sermons by {{user.firstname}} {{user.lastname}}</a></p>
+							{% else %}
+								<p>No sermons available by {{user.firstname}} {{user.lastname}} </p>
+							{%endif %}
+
+						{% endif %}
 					</div>
 				</div>
 				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
@@ -78,65 +128,70 @@
 						<h6><strong>Recent activities</strong></h6>
 					</div>
 				</div>
-				<div class="card shadow-lg p-1 mb-1 bg-white rounded">
-					<div class="card-body">
-						<h6><strong>Recent activities</strong></h6>
-					</div>
-				</div>
-				{% if owner %}
-					<div class="card shadow-lg p-1 mb-1 bg-white rounded">
-						<form action="{{url_for('profile', username=current_user.username)}}" method="post" novalidate>
-							{{form.hidden_tag()}}
-							<fieldset class="m-2">
-								<h6 class="card-title text-center m-1">Update info here...</h6>
-								<hr>
-								<div class="form-group">
-									{{form.username(class='form-control', placeholder='Username',type='text', style='color:black;padding:5px')}}
-									{% for error in form.username.errors %} <br>
-										<span class="text-danger"><small>{{error}}</small></span>
-									{% endfor %}
-								</div>
-								<div class="form-group">
-									{{form.firstname(class='form-control', placeholder='First name',type='text', style='color:black;padding:5px')}}
-									{% for error in form.firstname.errors %} <br>
-										<span class="text-danger"><small>{{error}}</small></span>
-									{% endfor %}
-								</div>
-								<div class="form-group">
-									{{form.lastname(class='form-control', placeholder='Last name',type='text', style='color:black;padding:5px')}}
-									{% for error in form.firstname.errors %} <br>
-										<span class="text-danger"><small>{{error}}</small></span>
-									{% endfor %}
-								</div>
-								<div class="form-group">
-									{{form.email(class='form-control', placeholder='Bio',type='email', style='color:black;padding:5px')}}
-									{% for error in form.email.errors %} <br>
-										<span class="text-danger"><small>{{error}}</small></span>
-									{% endfor %}
-								</div>
-								<div class="form-group">
-									{{form.role(class='form-control', placeholder='Role',type='text', style='color:black;padding:5px')}}
-									{% for error in form.role.errors %} <br>
-										<span class="text-danger"><small>{{error}}</small></span>
-									{% endfor %}
-								</div>
-								<div >
-									{{form.about_me(class='form-control', placeholder='Bio',type='email', style='color:black;padding:5px')}}
-									{% for error in form.about_me.errors %} <br>
-										<span class="text-danger"><small>{{error}}</small></span>
-									{% endfor %}
-								</div>
-								<div >
-									{{form.submit(class='btn btn-info btn-block m-2')}}
-								</div>
-							</fieldset>
-						</form>
-					</div>
-				{% endif%}
 			</div>
 		</div>
 	</div>
-	
+	<div class="" id="activities">
+
+		<div class="container p-3 mb-5">
+			<h3>Sermons</h3>
+			<div class="pt-2 mb-1">
+				{% if sermons %}
+
+	      	{% for sermon in sermons %}
+					<div class="row">
+							<div class="col-md-12">
+						      <div class="card shadow-lg p-3 mb-2 bg-white rounded">
+	                    <div class="row">
+	                      <div class="col-md-2">
+	                        <a href="{{url_for('sermon_details', sermon_id=sermon.id)}}">
+	                          <img src="{{url_for('static', filename='imgs/profile_img.jpg')}}" style="height: 9rem;width:10rem"class="img-thumbnail">
+	                        </a>
+	                      </div>
+	                      <div class="col-md-10">
+	                          <a href="{{url_for('sermon_details', sermon_id=sermon.id)}}" style="text-decoration:none;">
+	                            <h5 class="mt-1">{{sermon.title}}</h4>
+	                            <hr class="mt-1 text-warning" style="border:2px solid">
+	                            <strong>Text: <span class="text text-warning">{{sermon.text}}</span> </strong> <em class="text text-success">{{sermon.body|truncate(140,True)}}</em>
+	                          </a>
+	    											<br>
+	                          <span class="text-info pt-2"><a href="{{url_for('profile', username=sermon.author.username)}}">
+															{% if user == current_user %}
+															<p>Sermons that you posted.</p>
+															{% else %}
+															<p>By {{user.firstname}} {{user.lastname}}</p>
+															{% endif %}
+														</a> </span>
+	    											<p class="text-right">{{ sermon.created_at.strftime('%m-%d-%Y') }}</p>
+	                      </div>
+	                    </div>
+	                </div>
+							</div>
+					</div>
+	        {% endfor %}
+	        <div class="text-center mt-2">
+	          {% if prev_url %}
+	            <a href="{{ prev_url }}" class="btn btn-info btn_custom">Newer Sermons</a>
+	          {% endif %}
+
+	          {% if next_url %}
+	            <a href="{{ next_url }}" class="btn btn-outline-info btn_custom">Next page</a>
+	          {% endif %}
+	        </div>
+
+
+				{% else %}
+				<div class="">
+	        <p class="lead">
+	          No Sermons available by {{user.firstname}} {{user.lastname}}
+	          <span><a href="{{url_for('index')}}">Go home</a> </span>
+	        </p>
+	      </div>
+				{% endif %}
+
+			</div>
+
+	</div>
 </section>
 
 {% endblock content  %}

@@ -1,0 +1,28 @@
+<div class="container p-3 mb-5">
+  <h3>Sermons</h3>
+  <div class="pt-2 mb-1">
+    {% if sermons %}
+      {% for sermon in sermons %}
+        {% include '_sermon_layout.html' %}
+      {% endfor %}
+      <div class="text-center mt-2">
+        {% if prev_url %}
+          <a href="{{ prev_url }}" class="btn btn-info btn_custom">Newer Sermons</a>
+        {% endif %}
+
+        {% if next_url %}
+          <a href="{{ next_url }}" class="btn btn-outline-info btn_custom">Next page</a>
+        {% endif %}
+      </div>
+    {% else %}
+    <div class="">
+      <p class="lead">
+        No Sermons available by {{user.firstname}} {{user.lastname}}
+        <span><a href="{{url_for('index')}}">Go home</a> </span>
+      </p>
+    </div>
+    {% endif %}
+
+  </div>
+
+</div>

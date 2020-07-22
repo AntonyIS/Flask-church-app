@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content  %}
+<section id="profile_section">
+	<div id="section-profile-top">
+		<div class="pt-5 container">
+			<h1 class="mt-5">Editing - {{post.title | truncate(30, True)}}</h1>
+			<p class="lead">
+
+			</p>
+		</div>
+	</div>
+	<div class="container mt-3 mb-5">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-3">
+        <a href="{{url_for('profile', username=post.author.username)}}">
+  				<div class="card shadow-lg p-3 mb-1 bg-white rounded text-center">
+  					<img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded mx-auto" style="height: 150px; width:150px">
+  					<div class="card-body p-0">
+  						<small>{{post.author.firstname}} {{post.author.lastname}}</small>
+  						<input type="tex" disabled value="{{post.author.role}}" class="form-control" style="text-align: center">
+
+
+  					</div>
+  				</div>
+        </a>
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<div id="social_media_links" class="text-center">
+					        <a href="#" class="fa fa-facebook"></a>
+					        <a href="#" class="fa fa-twitter"></a>
+					        <a href="#" class="fa fa-linkedin"></a>
+				      </div>
+					</div>
+				</div>
+        <a href="{{url_for('post_details', post_id=post.id)}}" class="btn btn-success btn-block btn_custom">Go back</a>
+        <a href="#" class="btn btn-danger btn-block btn_custom">Delete</a>
+
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-9">
+				<div class="card shadow-lg p-3 mb-2 bg-white rounded">
+					<div class="card-body">
+						<form class="" action="{{url_for('post_edit', post_id=post.id)}}" method="post">
+              {{form.hidden_tag()}}
+              <fieldset>
+								<div class="form-group">
+									{{form.title(class='form-control', placeholder='Title', type='text')}}
+									{% for error in form.title.errors %} <br>
+										<span class="text-danger"><small>{{error}}</small></span>
+									{% endfor %}
+								</div>
+								<div class="form-group">
+									{{form.body(class='form-control', placeholder='Text Content',type='text')}}
+									{% for error in form.body.errors %} danger<br>
+										<span class="text-danger"><small>{{error}}</small></span>
+									{% endfor %}
+								</div>
+						
+
+								<div class="form-group">
+									{{form.submit(class='btn btn-info btn-md btn_custom')}}
+								</div>
+
+
+							</fieldset>
+            </form>
+					</div>
+				</div>
+
+					</div>
+				</div>
+			</div>
+
+	</div>
+
+</section>
+
+{% endblock content  %}

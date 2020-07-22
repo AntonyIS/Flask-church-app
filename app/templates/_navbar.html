@@ -1,52 +1,66 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="{{url_for('index')}}">Ruaraka Friends Church</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ">
-      <li class="nav-item">
-        <a class="nav-link" href="#">About us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Sermons</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Events</a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="#">Groups</a>
-      </li>
-       <li class="nav-item">
-        <a class="nav-link" href="#">Programs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{url_for('members')}}">Members</a>
-      </li>
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      {% if current_user.is_anonymous %}
-      <li class="nav-item">
-        <a class="nav-link btn btn-info btn_custom" href="{{url_for('signup')}}" style="color:white;padding-left:20px; padding-right: 20px">Join us</a>
-      </li>
-    
-      <li class="nav-item">
-        <a class="nav-link" href="{{url_for('login')}}" >Login</a>
-      </li>
-      {% else %}
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="{{url_for('profile',username=current_user.username)}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span><strong>{{current_user.username}}</strong></span><img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded" style="height: 40px; width:40px">
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{{url_for('profile',username=current_user.username)}}">Profile</a>
-          <a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
-          <div class="dropdown-divider"></div>
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="menu-area">
+  <div class="container">
+    <a class="navbar-brand  text-white" href="{{url_for('index')}}">Ruaraka Friends Church</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse  text-white" id="navbarNav">
+      <ul class="navbar-nav ">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle  text-white"  href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            About us
+          </a>
+          <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+            <a class="dropdown-item " href="{{url_for('pastors')}}">Pastors</a>
+            <a class="dropdown-item" href="{{url_for('members')}}">Members</a>
+            <a class="dropdown-item" href="/#section-leaders">Leadership</a>
+          </div>
+        </li>
+        <li class="nav-item mr-0 ">
+          <a class="nav-link mr-0 text-white" href="#/section-sermons">Sermons</a>
+        </li>
 
+
+         <div id="social_media_links" class="text-center ml-3">
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-youtube"></a>
+          <!-- <a href="#" class="fa fa-twitter"></a> -->
+          <a href="#" class="fa fa-google"></a>
+          <!-- <a href="#" class="fa fa-linkedin"></a> -->
         </div>
-      </li>
-     
-      {% endif %}
-    </ul>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+
+        {% if current_user.is_anonymous %}
+        <li class="nav-item">
+          <a class="nav-link btn btn-info btn_custom mr-1" href="{{url_for('signup')}}" style="color:white;padding-left:20px; padding-right: 20px">Join us</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link btn btn-warning btn_custom" href="{{url_for('login')}}" id="login_link" style="color:white;padding-left:20px; padding-right: 20px">Login</a>
+        </li>
+        {% else %}
+        {% if current_user.role == 'Pastor' %}
+        <li class="nav-item">
+          <a class="nav-link btn btn-info btn_custom text-white mt-2 pr-3" href="{{url_for('sermon')}}" >Post a sermon</a>
+        </li>
+        {% endif %}
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="{{url_for('profile',username=current_user.username)}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span><strong id="username-font">{{current_user.username}}</strong></span><img src="{{url_for('static', filename='imgs/profile_pic.png')}}" class="img-rounded" style="height: 40px; width:40px">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{url_for('profile',username=current_user.username)}}">Profile</a>
+            <a class="dropdown-item" href="{{url_for('logout')}}">Logout</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{url_for('profile_edit',username=current_user.username)}}">Edit profile</a>
+             <a class="dropdown-item" href="{{url_for('add_post')}}">Posts</a>
+          </div>
+        </li>
+
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>
