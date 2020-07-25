@@ -85,3 +85,14 @@ class SermonEditForm(FlaskForm):
 	text = StringField('Bible verse',validators=[DataRequired()])
 	body = TextAreaField('Content', validators=[DataRequired(), Length(min=0, max=500)])
 	submit = SubmitField("Edit sermon")
+
+
+class ResetPasswordRequestForm(FlaskForm):
+	email = StringField('Email', validators=[DataRequired(),Email()])
+	submit = SubmitField('Request password reset')
+
+
+class ResetPasswordForm(FlaskForm):
+	password = PasswordField('Password', validators=[DataRequired()])
+	password2 = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('password')])
+	submit = SubmitField('Request password')

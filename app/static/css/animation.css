@@ -1,0 +1,14 @@
+/* #section_home_top .btn_top_animate{
+  position: relative;
+  animation: buttonanimate 5s infinite;
+}
+
+#take-action{animation-timing-function: linear;}
+#contact-us{animation-timing-function: ease;}
+#join-us{animation-timing-function: ease-in;}
+
+
+@keyframes buttonanimate {
+  from {left: 0px;}
+  to {left:300px;}
+} */
