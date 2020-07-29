@@ -30,6 +30,7 @@
 											      <h1 class="text">{{user.firstname}} {{user.lastname}}</h1>
 														{% if user.role %}
 															<p class="text">{{user.role}}</p>
+															<em>{{user.email}}</em>
 														{% else %}
 															<p class="text">Member</p>
 														{% endif %}
